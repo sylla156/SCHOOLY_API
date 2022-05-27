@@ -1,5 +1,9 @@
+const STUDENTS = require('../../Models/Students.Models');
+
+
 const AllStudents = async (request, response) => {
-  response.send("hello world");
+  const student = await STUDENTS.find({});
+  response.send(student);
 };
 
 module.exports = AllStudents;
