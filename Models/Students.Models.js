@@ -10,10 +10,11 @@ const StudentsSchema = new mongoose.Schema(
       default: "schoolyFirst",
     },
     enpreinte: { type: String },
+    password: {type:String,minlength:8,required:false},
     nom: { type: String, required: false },
     prenom: { type: String, required: false },
     age: { type: Date },
-    tel: { type: Number, required: false },
+    tel: { type: String, required: false },
     pere: {
       nom: String,
       prenom: String,

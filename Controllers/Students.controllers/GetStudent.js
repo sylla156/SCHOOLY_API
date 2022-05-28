@@ -1,4 +1,5 @@
 const STUDENTS = require("../../Models/Students.Models");
+const Decrypt = require("../../utils/Decrypt");
 const isEmpty = require("../../utils/IsEmpty");
 const isSame = require("../../utils/IsSame");
 
@@ -17,7 +18,17 @@ const GetStudent = async (request, response) => {
             },
           });
         }else {
-            response.send(docs)
+           const value = Decrypt(password,docs[0].password);
+           value.then((res) => {
+               if(res) {
+                   response.send(docs)
+               }else {
+                   response.send({"errors": {
+                       "password": "is not found"
+                   }})
+               }
+           })
+
         }
       }
     });

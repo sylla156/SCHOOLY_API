@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt');
 
-const Decrypt = (PlainText,hash) => {
-    bcrypt.compare(PlainText, hash, function(err, result) {
-        console.log(result);
-    });
+const Decrypt = async (PlainText,hash) => {
+    const value = await bcrypt.compare(PlainText, hash);
+    return value;
 }
 
 module.exports = Decrypt;
