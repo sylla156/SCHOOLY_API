@@ -6,10 +6,10 @@ const isSame = require("../../utils/IsSame");
 const GetStudent = async (request, response) => {
   try {
     const { matricule, password } = request.body;
-    await STUDENTS.find({ matricule }, (error, docs) => {
+    STUDENTS.find({ matricule }, (error, docs) => {
       if (error) {
         response.status(500).send(err);
-        return;
+        // return;
       } else {
         if (isEmpty(docs)) {
           response.send({
@@ -17,18 +17,19 @@ const GetStudent = async (request, response) => {
               matricule: "no found",
             },
           });
-        }else {
-           const value = Decrypt(password,docs[0].password);
-           value.then((res) => {
-               if(res) {
-                   response.send(docs)
-               }else {
-                   response.send({"errors": {
-                       "password": "is not found"
-                   }})
-               }
-           })
-
+        } else {
+          const value = Decrypt(password, docs[0].password);
+          value.then((res) => {
+            if (res) {
+              response.send(docs);
+            } else {
+              response.send({
+                errors: {
+                  password: "is not found",
+                },
+              });
+            }
+          });
         }
       }
     });
@@ -36,7 +37,5 @@ const GetStudent = async (request, response) => {
     console.log(error);
   }
 };
-
-
 
 module.exports = GetStudent;
