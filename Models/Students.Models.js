@@ -2,17 +2,18 @@ const mongoose = require("../config/DatabaseConnection");
 
 const StudentsSchema = new mongoose.Schema(
   {
-    matricule: { type: String, minlength: 8, required: true },
+    matricule: { type: String, minlength: 8, required: false, unique: false },
     confidentiel: {
       type: String,
       minlength: 8,
-      required: true,
+      required: false,
       default: "schoolyFirst",
     },
     enpreinte: { type: String },
-    nom: { type: String, required: true },
-    prenom: { type: String, required: true },
+    nom: { type: String, required: false },
+    prenom: { type: String, required: false },
     age: { type: Date },
+    tel: { type: Number, required: false },
     pere: {
       nom: String,
       prenom: String,
@@ -23,10 +24,10 @@ const StudentsSchema = new mongoose.Schema(
       prenom: String,
       profession: String,
     },
-    niveau: { type: String, required: true },
+    niveau: { type: String, required: false },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
