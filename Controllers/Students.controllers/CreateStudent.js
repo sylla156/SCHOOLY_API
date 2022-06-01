@@ -9,7 +9,7 @@ const CreateStudent = async (request, response) => {
       data.password = res;
       STUDENTS.create(data, (error, docs) => {
         if (error) {
-          response.status(500).send(error);
+          response.status(404).send(error);
         }
         response.send(docs);
       });

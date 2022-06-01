@@ -8,8 +8,7 @@ const GetStudent = async (request, response) => {
     const { matricule, password } = request.body;
     STUDENTS.find({ matricule }, (error, docs) => {
       if (error) {
-        response.status(500).send(err);
-        // return;
+        response.status(404).send(error);
       } else {
         if (isEmpty(docs)) {
           response.send({
